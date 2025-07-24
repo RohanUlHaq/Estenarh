@@ -40,8 +40,8 @@ class BookSessionLocators {
     get buynow_btn() {
         return $('~Buy Now');
     }
-    get savedcard_selection() {
-        return $('//android.view.ViewGroup[@content-desc="saved_card_53"]/android.view.ViewGroup');
+    get all_saved_cards() {
+        return $$('//android.view.ViewGroup[contains(@content-desc, "saved_card_")]/android.view.ViewGroup');
     }
     get savedcard_input_cvc() {
         return $('~saved_card_input_cvc');

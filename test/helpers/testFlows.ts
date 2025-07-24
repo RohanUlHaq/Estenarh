@@ -47,7 +47,7 @@ export async function ForgotPassword(email: string, otp: string, password:string
 } 
 
 export async function SignupFlow(otp:string, password:string, confirmpassword:string) {
-        await browser.pause(5000);
+        await browser.pause(15000);
         await signup_screenLocators.nextbutton.click();
         await browser.pause(500);
         await signup_screenLocators.nextbutton.click();
@@ -137,5 +137,43 @@ export async function BookSessionTabby(consultant:string, email:string, phone:st
         await browser.hideKeyboard();
         await book_sessionLocators.tabbytermscheckbox.click();
         await book_sessionLocators.tabbylogincontinue.click();
+        await book_sessionLocators.payment_completebtn.click();
+}
+
+export async function SavedCardsbookingflow(consultant: string, cvc: string){
+        await book_sessionLocators.searchconsultant.setValue(consultant);
+        await book_sessionLocators.consultant_card.click();
+        await book_sessionLocators.book_sessionbtn.click();
+        const timeslots = await book_sessionLocators.all_timeslots;
+            if (timeslots.length > 0) {
+                await timeslots[0].click(); // Click the first available slot
+            } else {
+                throw new Error('No available time slots found!');
+            }
+        await book_sessionLocators.timeslot_booksession.click();
+        await book_sessionLocators.sessionconfirmation_paynow.click();
+        await book_sessionLocators.wallet_checkbox.click();
+        await book_sessionLocators.continuecheckout_btn.click();
+        await browser.pause(5000);
+        const savedCards = await book_sessionLocators.all_saved_cards;
+            if (savedCards.length > 0) {
+                await savedCards[0].click(); // Click the first saved card
+            } else {
+                throw new Error('No saved cards found!');
+            }
+        await book_sessionLocators.savedcard_input_cvc.setValue(cvc);
+        await book_sessionLocators.savedcard_confirm_button.click();
+        // await book_sessionLocators.card_number.setValue(4111111111111111);
+        // await browser.pause(2000);
+        // await book_sessionLocators.expiry_date.setValue(1235);  
+        // await book_sessionLocators.cvc.setValue(258);
+        // await book_sessionLocators.cardholder_name.setValue('Test');
+        // await book_sessionLocators.hide_keyboard.click();
+        // await book_sessionLocators.savecard_checkbox.click();
+        // await browser.pause(3000);
+        // await book_sessionLocators.card_paynow.click();
+        await browser.pause(12000);
+        await book_sessionLocators.Paybutton_hyperpay.click();
+        await browser.pause(4000);
         await book_sessionLocators.payment_completebtn.click();
 }
