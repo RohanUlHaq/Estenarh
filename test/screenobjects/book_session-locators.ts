@@ -103,14 +103,6 @@ class BookSessionLocators {
     get packagebuynow() {
         return $('~offered_packages_buy_now_button');
     }
-    
-    
-    // get linknum_tabby() {
-    //     return $('//android.view.View[@resource-id="tabby-checkout"]/android.view.View/android.view.View[2]/android.view.View[1]/android.view.View/android.view.View/android.view.View/android.view.View');
-    // }
-    // get clearemail() {
-    //     return $('//android.widget.EditText[@text="talha.ilyas@mailinator.com"]');
-    // }
     get testemailtabby() {
         return $('//android.widget.EditText[@resource-id=":r0:"]');
     }
@@ -129,9 +121,6 @@ class BookSessionLocators {
     get tabbytermscheckbox() {
         return $('//android.widget.Image');
     }
-    // get paytabbybtn() {
-    //     return $('//android.widget.Button[@text="Pay 47.42 SAR"]');
-    // }
 }
 
 module.exports = new BookSessionLocators();

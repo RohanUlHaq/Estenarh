@@ -8,9 +8,9 @@ const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCa
 
 describe('Sample', () => {
 
-    // it('login flow', async () => {
-    //     await completeLoginFlow('hamzakhan@yopmail.com', 'click123');
-    // })
+    it('login flow', async () => {
+        await completeLoginFlow('hamzakhan@yopmail.com', 'click123');
+    })
     
     // it('Signup flow with fresh build', async () => {
     //    await SignupFlow('1234','click123','click123');
@@ -60,13 +60,13 @@ describe('Sample', () => {
     //     })
 
 
-    // it('Book Session with existing client', async() => {
-    //     await SavedCardsbookingflow('Nawaz Sharif','856');
-    // })
-
-    it('Package buying', async() => {
-        await Packagebuy('Nawaz Sharif','345');
+    it('Book Session with existing client', async() => {
+        await SavedCardsbookingflow('Nawaz Sharif','856');
     })
+
+    // it('Package buying', async() => {
+    //     await Packagebuy('Nawaz Sharif','345');
+    // })
 
     // it('Forgot Password', async() => {
     //    await ForgotPassword('anser@yopmail.com', '1234', 'click12345', 'click12345');
