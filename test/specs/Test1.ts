@@ -5,25 +5,26 @@ const login_screenLocators = require('../screenobjects/login_screen-locators');
 const signup_screenLocators = require('../screenobjects/signup_screen-locators');
 const forgot_passwordLocators = require('../screenobjects/forgot_password-locators');
 const book_sessionLocators = require('../screenobjects/book_session-locators');
-const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCardsbookingflow, Packagebuy } = require('../helpers/testFlows');
+const gift_walletLocators = require('../screenobjects/gift_wallet-locators');
+const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCardsbookingflow, Packagebuy, GiftWalletFlow } = require('../helpers/testFlows');
 
 describe('Estenarh App Test Suite', () => {
-    beforeEach(async function() {
+    beforeEach(async function () {
         allure.addFeature('Estenarh Mobile App');
         //        allure.addParameter('environment', 'PLATFORM: Android');
         // If you want to add environment info, use addEnvironment if available:
         // allure.addEnvironment('PLATFORM', 'Android');
     });
 
-    it('login flow', async () => {
-        allure.addFeature('Authentication');
-        allure.addSeverity('critical');
-        allure.addDescription('Verify user can login with valid credentials', 'text');        
-        allure.startStep('Execute login flow');
-        await completeLoginFlow('rohanulhaq004@gmail.com', 'click123');
-        allure.endStep();
-    })
-    
+    // it('login flow', async () => {
+    //     allure.addFeature('Authentication');
+    //     allure.addSeverity('critical');
+    //     allure.addDescription('Verify user can login with valid credentials', 'text');
+    //     allure.startStep('Execute login flow');
+    //     await completeLoginFlow('rohanulhaq004@gmail.com', 'click123');
+    //     allure.endStep();
+    // })
+
     // it('Signup flow with fresh build', async () => {
     //     allure.addFeature('Authentication');
     //     allure.addSeverity('critical');
@@ -38,19 +39,19 @@ describe('Estenarh App Test Suite', () => {
     //     await SavedCardsbookingflow('Nawaz Sharif','856');
     // })
 
-    it('Package buying', async() => {
-        allure.addFeature('Package Purchase');
-        allure.addSeverity('critical');
-        allure.addDescription('Verify user can purchase a consultation package', 'text');
-        
-        allure.startStep('Search for consultant');
-        await book_sessionLocators.searchconsultant.setValue('Nawaz Sharif');
-        allure.endStep();
+    // it('Package buying', async() => {
+    //     allure.addFeature('Package Purchase');
+    //     allure.addSeverity('critical');
+    //     allure.addDescription('Verify user can purchase a consultation package', 'text');
 
-        allure.startStep('Select and purchase package');
-        await Packagebuy('Nawaz Sharif','345');
-        allure.endStep();
-    });
+    //     allure.startStep('Search for consultant');
+    //     await book_sessionLocators.searchconsultant.setValue('Nawaz Sharif');
+    //     allure.endStep();
+
+    //     allure.startStep('Select and purchase package');
+    //     await Packagebuy('Nawaz Sharif','345');
+    //     allure.endStep();
+    // });
 
     // it('Forgot Password', async() => {
     //     allure.addFeature('Authentication');
@@ -71,5 +72,21 @@ describe('Estenarh App Test Suite', () => {
     //     await BookSessionTabby('Nawaz Sharif','card.success@tabby.ai','500000001','8888');
     //     allure.endStep();
     // });
-        
-    });
+    it('Gift Wallet Flow', async () => {
+        allure.addFeature('Gift Wallet');
+        allure.addSeverity('critical');
+        allure.addDescription('Verify gift wallet functionality', 'text');
+
+        allure.startStep('Gift wallet flow for logged in client')
+        await GiftWalletFlow({
+            email: 'nayela@mailinator.com',
+            name: 'Nayela',
+            message: 'Here is a heart whelming gift for You!',
+            cvc: '123',
+            cardNumber: '4111111111111111',
+            expiryDate: '12/35',
+            cardholderName: 'Rohan Ul Haq'
+        });
+        allure.endStep();
+    })
+});

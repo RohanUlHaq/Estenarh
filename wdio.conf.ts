@@ -44,7 +44,7 @@ export const config: any = {
         ui: 'bdd',
         timeout: 150000
     },
-    afterTest: async function(test: any, context: any, { error, result, duration, passed, retries }: TestResult) {
+    afterTest: async function (test: any, context: any, { error, result, duration, passed, retries }: TestResult) {
         if (!passed) {
             // Take a screenshot when test fails
             const timestamp = new Date().toISOString().replace(/[^0-9]/g, '');
