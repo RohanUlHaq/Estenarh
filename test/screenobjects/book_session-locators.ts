@@ -25,7 +25,7 @@ class BookSessionLocators {
     get all_timeslots() {
         return $$('//android.view.ViewGroup[contains(@content-desc, "am") or contains(@content-desc, "pm")]/android.view.ViewGroup');
     }
-    get sessionconfirmation_paynow()   {
+    get sessionconfirmation_paynow() {
         return $('~session_confirmation_btn_pay_now');
     }
     get continuecheckout_btn() {
@@ -103,8 +103,8 @@ class BookSessionLocators {
     get packagebuynow() {
         return $('~offered_packages_buy_now_button');
     }
-    
-    
+
+
     // get linknum_tabby() {
     //     return $('//android.view.View[@resource-id="tabby-checkout"]/android.view.View/android.view.View[2]/android.view.View[1]/android.view.View/android.view.View/android.view.View/android.view.View');
     // }
