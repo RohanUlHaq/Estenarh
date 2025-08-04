@@ -6,7 +6,7 @@ const signup_screenLocators = require('../screenobjects/signup_screen-locators')
 const forgot_passwordLocators = require('../screenobjects/forgot_password-locators');
 const book_sessionLocators = require('../screenobjects/book_session-locators');
 const gift_walletLocators = require('../screenobjects/gift_wallet-locators');
-const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCardsbookingflow, Packagebuy, GiftWalletFlow } = require('../helpers/testFlows');
+const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCardsbookingflow, Packagebuy, GiftWalletFlow, scrollNumberPickerUiAutomator } = require('../helpers/testFlows');
 
 describe('Estenarh App Test Suite', () => {
     beforeEach(async function () {
@@ -25,15 +25,14 @@ describe('Estenarh App Test Suite', () => {
     //     allure.endStep();
     // })
 
-    // it('Signup flow with fresh build', async () => {
-    //     allure.addFeature('Authentication');
-    //     allure.addSeverity('critical');
-    //     allure.addDescription('Verify new user registration process');
-        
-    //     allure.startStep('Complete signup process');
-    //     await SignupFlow('1234','click123','click123');
-    //     allure.endStep();
-    // });
+    it('Signup flow with fresh build', async () => {
+        allure.addFeature('Authentication');
+        allure.addSeverity('critical');
+        allure.addDescription('Verify new user registration process', 'text');
+        allure.startStep('Complete signup process');
+        await SignupFlow('1234','click123','click123'); 
+        allure.endStep();
+    });
 
     // it('Book Session with existing client', async() => {
     //     await SavedCardsbookingflow('Nawaz Sharif','856');
