@@ -19,36 +19,13 @@ async function scrollNumberPicker(targetValue: string, currentValue: string) {
         await browser.execute('mobile: scrollGesture', {
             left: 600, top: 1100, width: 200, height: 200,
             direction: current > target ? 'up' : 'down',
-            percent: 50.0  // Increased from 0.75 to 0.9 for faster scrolling
+            percent: 0.9  // Increased from 0.75 to 0.9 for faster scrolling
         });
         
         // Reduced wait time between scrolls
         await browser.pause(200);  // Reduced from 500ms to 200ms
     }
 }
-
-// Export function for general number picker scrolling
-export async function scrollAndroidNumberPicker(targetValue: string, currentValue: string) {
-    const numberPicker = await $('//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @text="' + currentValue + '"]');
-    
-    // Calculate how many steps to scroll
-    const current = parseInt(currentValue);
-    const target = parseInt(targetValue);
-    const steps = Math.abs(current - target);
-    
-    // Use Android's native scroll command with optimized speed
-    for (let i = 0; i < steps; i++) {
-        await browser.execute('mobile: scrollGesture', {
-            left: 600, top: 1100, width: 200, height: 200,
-            direction: current > target ? 'up' : 'down',
-            percent: 50.0  // Increased from 0.75 to 0.9 for faster scrolling
-        });
-        
-        // Reduced wait time between scrolls
-        await browser.pause(200);  // Reduced from 500ms to 200ms
-    }
-}
-
 
 export async function completeLoginFlow(email: string, password: string) {
     // Navigate through initial screens
@@ -94,17 +71,17 @@ export async function ForgotPassword(email: string, otp: string, password: strin
 
 export async function SignupFlow(otp: string, password: string, confirmpassword: string) {
     await browser.pause(5000);
-    // await signup_screenLocators.nextbutton.click();
-    // await browser.pause(500);
-    // await signup_screenLocators.nextbutton.click();
-    // await browser.pause(500);
-    // await signup_screenLocators.nextbutton.click();
-    // await browser.pause(500);
-    // await signup_screenLocators.nextbutton.click();
-    // await browser.pause(500);
-    // await signup_screenLocators.nextbutton.click();
-    // await browser.pause(500);
-    // await signup_screenLocators.explorebutton.click();
+    await signup_screenLocators.nextbutton.click();
+    await browser.pause(500);
+    await signup_screenLocators.nextbutton.click();
+    await browser.pause(500);
+    await signup_screenLocators.nextbutton.click();
+    await browser.pause(500);
+    await signup_screenLocators.nextbutton.click();
+    await browser.pause(500);
+    await signup_screenLocators.nextbutton.click();
+    await browser.pause(500);
+    await signup_screenLocators.explorebutton.click();
     await signup_screenLocators.bottom_nav_menu.click();
     await signup_screenLocators.guestmenu_loginbtn.click();
     await signup_screenLocators.emailswitcher.click();
@@ -142,7 +119,7 @@ export async function SignupFlow(otp: string, password: string, confirmpassword:
     await $('//android.view.ViewGroup[@content-desc="signup_details_date_picker_date_of_birth"]').click();
     await browser.pause(1000);
     
-    await scrollNumberPicker('2000', '2019'); 
+    await scrollNumberPicker('2015', '2019'); 
     
     await $('//android.widget.Button[@resource-id="android:id/button1"]').click();
     await $('//android.widget.TextView[@text="Next"]').click();

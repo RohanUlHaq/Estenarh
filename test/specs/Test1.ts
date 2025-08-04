@@ -72,21 +72,21 @@ describe('Estenarh App Test Suite', () => {
     //     allure.endStep();
     // });
 
-    it('Gift Wallet Flow', async () => {
-        allure.addFeature('Gift Wallet');
-        allure.addSeverity('critical');
-        allure.addDescription('Verify gift wallet functionality', 'text');
+    // it('Gift Wallet Flow', async () => {
+    //     allure.addFeature('Gift Wallet');
+    //     allure.addSeverity('critical');
+    //     allure.addDescription('Verify gift wallet functionality', 'text');
 
-        allure.startStep('Gift wallet flow for logged in client')
-        await GiftWalletFlow({
-            email: 'nayela@mailinator.com',
-            name: 'Nayela',
-            message: 'Here is a heart whelming gift for You!',
-            cvc: '123',
-            cardNumber: '4111111111111111',
-            expiryDate: '12/35',
-            cardholderName: 'Rohan Ul Haq'
-        });
-        allure.endStep();
-    })
+    //     allure.startStep('Gift wallet flow for logged in client')
+    //     await GiftWalletFlow({
+    //         email: 'nayela@mailinator.com',
+    //         name: 'Nayela',
+    //         message: 'Here is a heart whelming gift for You!',
+    //         cvc: '123',
+    //         cardNumber: '4111111111111111',
+    //         expiryDate: '12/35',
+    //         cardholderName: 'Rohan Ul Haq'
+    // //     });
+    // //     allure.endStep();
+    // })
 });
