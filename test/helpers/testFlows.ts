@@ -4,6 +4,7 @@ const book_sessionLocators = require('../screenobjects/book_session-locators');
 const signup_screenLocators = require('../screenobjects/signup_screen-locators');
 const forgot_passwordLocators = require('../screenobjects/forgot_password-locators');
 const gift_walletLocators = require('../screenobjects/gift_wallet-locators');
+const resources_locator = require('../screenobjects/resources-locator');
 
 // Helper function for scrolling Android number picker
 async function scrollNumberPicker(targetValue: string, currentValue: string) {
@@ -263,4 +264,25 @@ export async function GiftWalletFlow({ email, name, message, cvc, cardNumber, ex
     await browser.pause(4000);
     await book_sessionLocators.payment_completebtn.click();
     await expect(gift_walletLocators.bottom_nav_menu).toBeDisplayed();
+}
+
+export async function AnxietyQuestionnaire(){
+    await resources_locator.resourcesnavbtn.click();
+    await resources_locator.anxiety_questionnaire.click();
+    await resources_locator.takequestionnairebtn.click();
+    await resources_locator.questionnaire_option0.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option2.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option1.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option3.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option1.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option2.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option3.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_btn_continue.click();
 }
