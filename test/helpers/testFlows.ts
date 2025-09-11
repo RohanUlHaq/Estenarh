@@ -58,10 +58,10 @@ export async function ForgotPassword(email: string, otp: string, password: strin
     await forgot_passwordLocators.guestmenu_loginbtn.click();
     await forgot_passwordLocators.emailswitcher.click();
     await forgot_passwordLocators.login_input.setValue(email);
-    await forgot_passwordLocators.login_nextbtn.click();
+    await forgot_passwordLocators.nextbtn.click();
     await forgot_passwordLocators.forgot_pwdlink.click();
     await browser.pause(2000);
-    await forgot_passwordLocators.resetpassword_btn.click();
+    await forgot_passwordLocators.nextbtn.click();
     await browser.pause(3000);
     await forgot_passwordLocators.otp.setValue(otp);
     await forgot_passwordLocators.otp_nextbtn.click();
@@ -110,10 +110,10 @@ export async function SignupFlow(otp: string, password: string, confirmpassword:
     await signup_screenLocators.otp.setValue(otp);
     await signup_screenLocators.otp_nextbtn.click();
     await signup_screenLocators.input_name.setValue(generateRandomName());
-    await signup_screenLocators.inputname_nextbtn.click();
+    await signup_screenLocators.signup_nextbtn.click();
     await signup_screenLocators.gender_bottomsheet.click();
     await signup_screenLocators.male_optionselect.click();
-    await signup_screenLocators.gender_nextbtn.click();
+    await signup_screenLocators.signup_nextbtn.click();
     await browser.pause(2000);
     
     // Handle date picker for date of birth
@@ -123,10 +123,10 @@ export async function SignupFlow(otp: string, password: string, confirmpassword:
     await scrollNumberPicker('2015', '2019'); 
     
     await $('//android.widget.Button[@resource-id="android:id/button1"]').click();
-    await $('//android.widget.TextView[@text="Next"]').click();
+    await signup_screenLocators.signup_nextbtn.click();
     await signup_screenLocators.password.setValue(password);
     await signup_screenLocators.confirm_password.setValue(confirmpassword);
-    await signup_screenLocators.password_nextbtn.click();
+    await signup_screenLocators.signup_nextbtn.click();
     await expect(signup_screenLocators.welcome_message).toBeDisplayed();
     await expect(signup_screenLocators.welcome_message).toHaveText('Glad to have you at Estenarh!');
     await signup_screenLocators.welcome_nextbtn.click();
@@ -165,6 +165,8 @@ export async function BookSessionTabby(consultant: string, email: string, phone:
     await browser.hideKeyboard();
     await book_sessionLocators.tabbytermscheckbox.click();
     await book_sessionLocators.tabbylogincontinue.click();
+    await expect(book_sessionLocators.payment_successmsg).toBeDisplayed();
+    await expect(book_sessionLocators.payment_successmsg).toHaveText('Your payment is complete! Your session has been successfully booked');
     await book_sessionLocators.payment_completebtn.click();
 }
 
@@ -203,6 +205,8 @@ export async function SavedCardsbookingflow(consultant: string, cvc: string) {
     await browser.pause(12000);
     await book_sessionLocators.Paybutton_hyperpay.click();
     await browser.pause(4000);
+    await expect(book_sessionLocators.payment_successmsg).toBeDisplayed();
+    await expect(book_sessionLocators.payment_successmsg).toHaveText('Your payment is complete! Your session has been successfully booked');
     await book_sessionLocators.payment_completebtn.click();
 }
 
