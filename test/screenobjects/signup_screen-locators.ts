@@ -9,7 +9,7 @@ class SignupScreenLocators {
         return $('~Menu');
     }
     get guestmenu_loginbtn() {
-        return $('~guest_menu_login_btn');
+        return $('~menu_btn_login');
     }
     get emailswitcher() {
         return $('~login_switcher_email_option');
@@ -18,43 +18,37 @@ class SignupScreenLocators {
         return $('~login_input_email');
     }
     get login_nextbtn() {
-        return $('~login_next_btn');
+        return $('~login_btn_next');
     }
     get otp() {
-        return $('~otp_input');
+        return $('~verification_code_field');
     }
     get otp_nextbtn() {
-        return $('~otp_next_btn');
+        return $('~verification_btn_next');
     }
     get input_name() {
-        return $('~signup_input_name');
+        return $('~signup_details_input_name');
     }
-    get inputname_nextbtn() {
-        return $('~signup_name_next_btn');
+    get signup_nextbtn() {
+        return $('~signup_details_btn_next');
     }
     get gender_bottomsheet() {
-        return $('~gender_bottomsheet');
+        return $('~signup_details_bottom_sheet_gender');
     }
     get male_optionselect() {
-        return $('~male_option');
-    }
-    get gender_nextbtn() {
-        return $('~gender_next_btn');
+        return $('//android.widget.TextView[@text="Male"]');
     }
     get password() {
-        return $('~password_input');
+        return $('~signup_details_input_password');
     }
     get confirm_password() {
-        return $('~confirm_password_input');
-    }
-    get password_nextbtn() {
-        return $('~password_next_btn');
+        return $('~signup_details_input_confirm_password');
     }
     get welcome_message() {
-        return $('~welcome_message');
+        return $('//android.widget.TextView[@text="Glad to have you at Estenarh!"]');
     }
     get welcome_nextbtn() {
-        return $('~welcome_next_btn');
+        return $('~welcome_btn_start');
     }
 }
 
