@@ -1,4 +1,4 @@
-export const TIMEOUTS = {
+export const timeouts = {
     // Navigation timeouts
     NAVIGATION: 5000,
     PAGE_LOAD: 12000,

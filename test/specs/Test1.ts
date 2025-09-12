@@ -1,5 +1,6 @@
 /// <reference types="@wdio/globals/types" />
 import allure from '@wdio/allure-reporter';
+import { cardInputs } from '../constants/cardDetails';
 
 const login_screenLocators = require('../screenobjects/login_screen-locators');
 const signup_screenLocators = require('../screenobjects/signup_screen-locators');
@@ -28,10 +29,10 @@ describe('Estenarh App Test Suite', () => {
     // it('Signup flow with fresh build', async () => {
     //     allure.addFeature('Authentication');
     //     allure.addSeverity('critical');
-    //     allure.addDescription('Verify new user registration process');
-    //     
+    //     allure.addDescription('Verify new user registration process', 'text');
+
     //     allure.startStep('Complete signup process');
-    //     await SignupFlow('1234','click123','click123');
+    //     await SignupFlow('1234', 'click123', 'click123');
     //     allure.endStep();
     // });
 
@@ -72,6 +73,7 @@ describe('Estenarh App Test Suite', () => {
     //     await BookSessionTabby('Nawaz Sharif','card.success@tabby.ai','500000001','8888');
     //     allure.endStep();
     // });
+
     it('Gift Wallet Flow', async () => {
         allure.addFeature('Gift Wallet');
         allure.addSeverity('critical');
@@ -82,10 +84,10 @@ describe('Estenarh App Test Suite', () => {
             email: 'nayela@mailinator.com',
             name: 'Nayela',
             message: 'Here is a heart whelming gift for You!',
-            cvc: '123',
-            cardNumber: '4111111111111111',
-            expiryDate: '12/35',
-            cardholderName: 'Rohan Ul Haq'
+            cvc: cardInputs.CVC,
+            cardNumber: cardInputs.CardNumber,
+            expiryDate: cardInputs.ExpiryDate,
+            cardholderName: cardInputs.CardHolderName
         });
         allure.endStep();
     })
