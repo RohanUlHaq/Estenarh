@@ -21,8 +21,10 @@ export const config: any = {
         'appium:deviceName': 'Galaxy S23 Ultra',
         'appium:platformVersion': '15.0',
         'appium:automationName': 'UiAutomator2',
-        'appium:app': 'app/app-staging-release.apk',
-        'appium:noReset': true  // This prevents app reinstallation
+        'appium:app': './app/app-staging-release.apk',
+        'appium:noReset': true,
+        'appium:autoGrantPermissions': true,
+        'appium:newCommandTimeout': 240
     }],
     logLevel: 'info',
     bail: 0,
