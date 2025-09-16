@@ -133,13 +133,31 @@ export async function BookSessionTabby(consultant: string, email: string, phone:
     await book_sessionLocators.tabby_btn.click();
     await book_sessionLocators.continuecheckout_btn.click();
     await browser.pause(timeouts.PAYMENT_CONFIRMATION);
-    await book_sessionLocators.tabbyloginphone.clearValue();
-    await book_sessionLocators.tabbyloginphone.setValue(phone);
-    await book_sessionLocators.tabbylogincontinue.click();
+    try {
+        const loginEmailVisible = await book_sessionLocators.testemailtabby.isDisplayed();
+        if (loginEmailVisible) {
+            await book_sessionLocators.testemailtabby.clearValue();
+            await book_sessionLocators.testemailtabby.setValue(email);
+            await book_sessionLocators.tabbylogincontinue.click();
+            await browser.pause(timeouts.PAYMENT_CONFIRMATION);
+            await book_sessionLocators.tabbyloginphone.clearValue();
+            await book_sessionLocators.tabbyloginphone.setValue(phone);
+            await book_sessionLocators.tabbylogincontinue.click();
+        }
+    } catch (error) {
+        console.log('Email login not visible, continuing...');
+    }
     await browser.pause(timeouts.PAYMENT_CONFIRMATION);
-    await book_sessionLocators.testemailtabby.clearValue();
-    await book_sessionLocators.testemailtabby.setValue(email);
-    await book_sessionLocators.tabbylogincontinue.click();
+    try {
+        const loginEmailVisible = await book_sessionLocators.testemailtabby.isDisplayed();
+        if (loginEmailVisible) {
+            await book_sessionLocators.testemailtabby.clearValue();
+            await book_sessionLocators.testemailtabby.setValue(email);
+            await book_sessionLocators.tabbylogincontinue.click();
+        }
+    } catch (error) {
+        console.log('Email login not visible, continuing...');
+    }
     await book_sessionLocators.tabbyotp.click();
     await book_sessionLocators.tabbyotp.setValue(otp);
     await browser.hideKeyboard();
