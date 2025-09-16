@@ -5,6 +5,29 @@ const book_sessionLocators = require('../screenobjects/book_session-locators');
 const signup_screenLocators = require('../screenobjects/signup_screen-locators');
 const forgot_passwordLocators = require('../screenobjects/forgot_password-locators');
 const gift_walletLocators = require('../screenobjects/gift_wallet-locators');
+const resources_locator = require('../screenobjects/resources-locator');
+
+// Helper function for scrolling Android number picker
+async function scrollNumberPicker(targetValue: string, currentValue: string) {
+    const numberPicker = await $('//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @text="' + currentValue + '"]');
+    
+    // Calculate how many steps to scroll
+    const current = parseInt(currentValue);
+    const target = parseInt(targetValue);
+    const steps = Math.abs(current - target);
+    
+    // Use Android's native scroll command with optimized speed
+    for (let i = 0; i < steps; i++) {
+        await browser.execute('mobile: scrollGesture', {
+            left: 600, top: 1100, width: 200, height: 200,
+            direction: current > target ? 'up' : 'down',
+            percent: 0.9  // Increased from 0.75 to 0.9 for faster scrolling
+        });
+        
+        // Reduced wait time between scrolls
+        await browser.pause(200);  // Reduced from 500ms to 200ms
+    }
+}
 
 export async function completeLoginFlow(email: string, password: string) {
     // Navigate through initial screens
@@ -36,7 +59,7 @@ export async function ForgotPassword(email: string, otp: string, password: strin
     await forgot_passwordLocators.guestmenu_loginbtn.click();
     await forgot_passwordLocators.emailswitcher.click();
     await forgot_passwordLocators.login_input.setValue(email);
-    await forgot_passwordLocators.login_nextbtn.click();
+    await forgot_passwordLocators.nextbtn.click();
     await forgot_passwordLocators.forgot_pwdlink.click();
     await browser.pause(timeouts.ELEMENT_WAIT);
     await forgot_passwordLocators.resetpassword_btn.click();
@@ -88,7 +111,7 @@ export async function SignupFlow(otp: string, password: string, confirmpassword:
     await signup_screenLocators.otp.setValue(otp);
     await signup_screenLocators.otp_nextbtn.click();
     await signup_screenLocators.input_name.setValue(generateRandomName());
-    await signup_screenLocators.inputname_nextbtn.click();
+    await signup_screenLocators.signup_nextbtn.click();
     await signup_screenLocators.gender_bottomsheet.click();
     await signup_screenLocators.male_optionselect.click();
     await signup_screenLocators.gender_nextbtn.click();
@@ -97,10 +120,21 @@ export async function SignupFlow(otp: string, password: string, confirmpassword:
     // await $('//android.view.ViewGroup[@content-desc="signup_details_date_picker_date_of_birth"]').click();
     // await $('android=new UiScrollable(new UiSelector().scrollable(true).instance(2)).scrollIntoView(new UiSelector().text("2000"))');
     // await $('//android.widget.Button[@resource-id="android:id/button1"]').click();
-    // await $('//android.widget.TextView[@text="Next"]').click();
+    // await $('//android.widget.TextView[@text="Next"]').click()
+    await signup_screenLocators.signup_nextbtn.click();
+    await browser.pause(2000);
+    
+    // Handle date picker for date of birth
+    await $('//android.view.ViewGroup[@content-desc="signup_details_date_picker_date_of_birth"]').click();
+    await browser.pause(1000);
+    
+    await scrollNumberPicker('2015', '2019'); 
+    
+    await $('//android.widget.Button[@resource-id="android:id/button1"]').click();
+    await signup_screenLocators.signup_nextbtn.click();
     await signup_screenLocators.password.setValue(password);
     await signup_screenLocators.confirm_password.setValue(confirmpassword);
-    await signup_screenLocators.password_nextbtn.click();
+    await signup_screenLocators.signup_nextbtn.click();
     await expect(signup_screenLocators.welcome_message).toBeDisplayed();
     await expect(signup_screenLocators.welcome_message).toHaveText('Glad to have you at Estenarh!');
     await signup_screenLocators.welcome_nextbtn.click();
@@ -164,6 +198,8 @@ export async function BookSessionTabby(consultant: string, email: string, phone:
     await book_sessionLocators.tabbytermscheckbox.click();
     await book_sessionLocators.tabbylogincontinue.click();
     await browser.pause(timeouts.PAYMENT_PROCESSING);
+    await expect(book_sessionLocators.payment_successmsg).toBeDisplayed();
+    await expect(book_sessionLocators.payment_successmsg).toHaveText('Your payment is complete! Your session has been successfully booked');
     await book_sessionLocators.payment_completebtn.click();
 }
 
@@ -202,6 +238,8 @@ export async function SavedCardsbookingflow(consultant: string, cvc: string) {
     await browser.pause(timeouts.PAYMENT_PROCESSING);
     await book_sessionLocators.Paybutton_hyperpay.click();
     await browser.pause(timeouts.PAYMENT_CONFIRMATION);
+    await expect(book_sessionLocators.payment_successmsg).toBeDisplayed();
+    await expect(book_sessionLocators.payment_successmsg).toHaveText('Your payment is complete! Your session has been successfully booked');
     await book_sessionLocators.payment_completebtn.click();
 }
 
@@ -263,4 +301,25 @@ export async function GiftWalletFlow({ email, name, message, cvc, cardNumber, ex
     await browser.pause(timeouts.PAYMENT_CONFIRMATION);
     await book_sessionLocators.payment_completebtn.click();
     await expect(gift_walletLocators.bottom_nav_menu).toBeDisplayed();
+}
+
+export async function AnxietyQuestionnaire(){
+    await resources_locator.resourcesnavbtn.click();
+    await resources_locator.anxiety_questionnaire.click();
+    await resources_locator.takequestionnairebtn.click();
+    await resources_locator.questionnaire_option0.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option2.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option1.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option3.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option1.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option2.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_option3.click();
+    await resources_locator.questionnaire_btn_next.click();
+    await resources_locator.questionnaire_btn_continue.click();
 }

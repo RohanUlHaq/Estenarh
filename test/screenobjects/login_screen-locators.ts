@@ -1,5 +1,3 @@
-import { $ } from "@wdio/globals";
-console.log('Loaded book_session-locators');
 class LoginScreenLocators {
     get nextbutton() {
         return $('~app_tour_footer_btn_next');
