@@ -12,7 +12,7 @@ export const config: any = {
     // new commit 
     port: 4723,
     specs: [
-        './test/specs/Test1.ts'
+        '.test/specs/estenarhE2E.ts'
     ],
     exclude: [],
     maxInstances: 10,
