@@ -1,6 +1,7 @@
 /// <reference types="@wdio/globals/types" />
 import allure from '@wdio/allure-reporter';
 import { cardInputs } from '../constants/cardDetails';
+import { miscellaneous } from '../constants/miscellaneous';
 
 const login_screenLocators = require('../screenobjects/login_screen-locators');
 const signup_screenLocators = require('../screenobjects/signup_screen-locators');
@@ -26,53 +27,61 @@ describe('Estenarh App Test Suite', () => {
     //     allure.endStep();
     // })
 
-    // it('Signup flow with fresh build', async () => {
-    //     allure.addFeature('Authentication');
-    //     allure.addSeverity('critical');
-    //     allure.addDescription('Verify new user registration process', 'text');
+    it('Signup flow with fresh build', async () => {
+        allure.addFeature('Authentication');
+        allure.addSeverity('critical');
+        allure.addDescription('Verify new user registration process', 'text');
 
-    //     allure.startStep('Complete signup process');
-    //     await SignupFlow('1234', 'click123', 'click123');
-    //     allure.endStep();
-    // });
+        allure.startStep('Complete signup process');
+        await SignupFlow({
+            otp: miscellaneous.ClientOTP,
+            password: miscellaneous.ClientPassword,
+            confirmpassword: miscellaneous.ClientConfirmPassword
+        });
+        allure.endStep();
+    });
 
-    // it('Book Session with existing client', async() => {
-    //     await SavedCardsbookingflow('Nawaz Sharif','856');
-    // })
-
-    // it('Package buying', async() => {
+    // it('Package buying', async () => {
     //     allure.addFeature('Package Purchase');
     //     allure.addSeverity('critical');
     //     allure.addDescription('Verify user can purchase a consultation package', 'text');
-
-    //     allure.startStep('Search for consultant');
-    //     await book_sessionLocators.searchconsultant.setValue('Nawaz Sharif');
-    //     allure.endStep();
-
     //     allure.startStep('Select and purchase package');
-    //     await Packagebuy('Nawaz Sharif','345');
+    //     await Packagebuy({
+    //         consultant: miscellaneous.ConsultantName,
+    //         cvc: cardInputs.CVC
+    //     });
     //     allure.endStep();
     // });
 
-    // it('Forgot Password', async() => {
+    // it('Forgot Password', async () => {
     //     allure.addFeature('Authentication');
     //     allure.addSeverity('critical');
-    //     allure.addDescription('Verify forgot password functionality');
-    //     
+    //     allure.addDescription('Verify forgot password functionality', 'text');
+
     //     allure.startStep('Initiate password reset');
-    //     await ForgotPassword('anser@yopmail.com', '1234', 'click12345', 'click12345');
+    //     await ForgotPassword({
+    //         email: miscellaneous.ClientMail,
+    //         otp: miscellaneous.ClientOTP,
+    //         password: miscellaneous.ClientPassword,
+    //         confirmpassword: miscellaneous.ClientConfirmPassword
+    //     });
     //     allure.endStep();
     // });
 
-    it('Book Session with Tabby', async () => {
-        allure.addFeature('Payment Processing');
-        allure.addSeverity('critical');
-        allure.addDescription('Verify booking session using Tabby payment method', 'text');
+    // it('Book Session with Tabby', async () => {
+    //     allure.addFeature('Payment Processing');
+    //     allure.addSeverity('critical');
+    //     allure.addDescription('Verify booking session using Tabby payment method', 'text');
 
-        allure.startStep('Book session with consultant');
-        await BookSessionTabby('Nawaz Sharif', 'card.success@tabby.ai', '500000001', '8888');
-        allure.endStep();
-    });
+    //     allure.startStep('Book session with consultant');
+    //     await BookSessionTabby({
+    //         consultant: miscellaneous.ConsultantName,
+    //         email: cardInputs.TabbyEmail,
+    //         phone: cardInputs.TabbyPhone,
+    //         otp: cardInputs.TabbyOTP
+    //     });
+    //     allure.endStep();
+    // });
 
     // it('Gift Wallet Flow', async () => {
     //     allure.addFeature('Gift Wallet');

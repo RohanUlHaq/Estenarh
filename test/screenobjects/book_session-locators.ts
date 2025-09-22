@@ -7,8 +7,11 @@ class BookSessionLocators {
     get searchconsultant() {
         return $('~consultant_list_input_search');
     }
-    get consultant_card() {
-        return $('//android.view.ViewGroup[@content-desc="consultant_list_consultant_card_823"]/android.view.ViewGroup');
+    // get consultant_card() {
+    //     return $('~consultant_list_consultant_card_626');
+    // }
+    consultant_card(consultant: string) {
+        return $(`//android.widget.TextView[@text='${consultant}']/ancestor::android.view.ViewGroup[contains(@resource-id,"consultant_list_consultant_card_")]`);
     }
     get consultant_card_newuser() {
         return $('//android.view.ViewGroup[@content-desc="Recommended, Ahmed Consultant, Social Worker, 52 Reviews, # Next available at 12:00 PM, 391.00 SAR, 351.90 SAR"]/android.view.ViewGroup');

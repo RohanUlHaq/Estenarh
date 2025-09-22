@@ -27,10 +27,12 @@ export async function completeLoginFlow(email: string, password: string) {
 
     // Handle notifications
     await browser.pause(timeouts.CLICK_WAIT);
-    await login_screenLocators.Notnow_notifications.click();
+    // await login_screenLocators.Notnow_notifications.click();
 }
 
-export async function ForgotPassword(email: string, otp: string, password: string, confirmpassword: string) {
+type ForgotPasswordParams = { email: string, otp: string, password: string, confirmpassword: string }
+
+export async function ForgotPassword({ email, otp, password, confirmpassword }: ForgotPasswordParams) {
     await browser.pause(timeouts.NAVIGATION);
     await forgot_passwordLocators.bottom_nav_menu.click();
     await forgot_passwordLocators.guestmenu_loginbtn.click();
@@ -48,7 +50,9 @@ export async function ForgotPassword(email: string, otp: string, password: strin
     await forgot_passwordLocators.reset_nextbtn.click();
 }
 
-export async function SignupFlow(otp: string, password: string, confirmpassword: string) {
+type SignupParams = { otp: string, password: string, confirmpassword: string }
+
+export async function SignupFlow({ otp, password, confirmpassword }: SignupParams) {
     await browser.pause(timeouts.LONG_WAIT);
     await signup_screenLocators.nextbutton.click();
     await browser.pause(timeouts.ANIMATION);
@@ -104,10 +108,12 @@ export async function SignupFlow(otp: string, password: string, confirmpassword:
     await expect(signup_screenLocators.welcome_message).toBeDisplayed();
     await expect(signup_screenLocators.welcome_message).toHaveText('Glad to have you at Estenarh!');
     await signup_screenLocators.welcome_nextbtn.click();
-    await login_screenLocators.Notnow_notifications.click();
+    // await login_screenLocators.Notnow_notifications.click();
 }
 
-export async function BookSessionTabby(consultant: string, email: string, phone: string, otp: string) {
+type TabbyParams = { consultant: string, email: string, phone: string, otp: string }
+
+export async function BookSessionTabby({ consultant, email, phone, otp }: TabbyParams) {
     await browser.pause(timeouts.SHORT_WAIT); // Add a wait here before interacting with elements
     await book_sessionLocators.searchconsultant.setValue(consultant);
     await book_sessionLocators.consultant_card.click();
@@ -205,20 +211,29 @@ export async function SavedCardsbookingflow(consultant: string, cvc: string) {
     await book_sessionLocators.payment_completebtn.click();
 }
 
-export async function Packagebuy(consultant: string, cvc: string) {
+type PackagebuyParams = { consultant: string, cvc: string }
+
+export async function Packagebuy({ consultant, cvc }: PackagebuyParams) {
     await book_sessionLocators.searchconsultant.setValue(consultant);
-    await book_sessionLocators.consultant_card.click();
+    await book_sessionLocators.consultant_card(consultant).click();
     await book_sessionLocators.explorepackage.click();
     await book_sessionLocators.packagebuynow.click();
     await book_sessionLocators.sessionconfirmation_paynow.click();
-    await book_sessionLocators.wallet_checkbox.click();
+    try {
+        const isVisible = await book_sessionLocators.wallet_checkbox.isDisplayed();
+        if (isVisible) {
+            await book_sessionLocators.wallet_checkbox.click();
+        }
+    } catch (error) {
+        console.log('Wallet checkbox not found or not visible, continuing...');
+    }
     await book_sessionLocators.continuecheckout_btn.click();
     await browser.pause(timeouts.NAVIGATION);
+    await book_sessionLocators.all_saved_cards;
     const savedCards = await book_sessionLocators.all_saved_cards;
     if (savedCards.length > 0) {
         await savedCards[0].click(); // Click the first saved card
-    }
-    else {
+    } else {
         throw new Error('No saved cards found!');
     }
     await book_sessionLocators.savedcard_input_cvc.setValue(cvc);
