@@ -6,7 +6,9 @@ const signup_screenLocators = require('../screenobjects/signup_screen-locators')
 const forgot_passwordLocators = require('../screenobjects/forgot_password-locators');
 const gift_walletLocators = require('../screenobjects/gift_wallet-locators');
 
-export async function completeLoginFlow(email: string, password: string) {
+type LoginParams = { email: string, password: string }
+
+export async function completeLoginFlow({ email, password }: LoginParams) {
     // Navigate through initial screens
     await login_screenLocators.nextbutton.click();
     await login_screenLocators.nextbutton.click();
