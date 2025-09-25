@@ -12,7 +12,7 @@ This project contains automated end-to-end tests for the Estenarh mobile applica
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/RohanUlHaq/Estenarh.git
+   git clone https://github.com/RohanUlHaq/Appium-Estenarh.git
    ```
 2. Install the dependencies:
    ```bash
