@@ -13,9 +13,6 @@ const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCa
 describe('Estenarh App Test Suite', () => {
     beforeEach(async function () {
         allure.addFeature('Estenarh Mobile App');
-        //        allure.addParameter('environment', 'PLATFORM: Android');
-        // If you want to add environment info, use addEnvironment if available:
-        // allure.addEnvironment('PLATFORM', 'Android');
     });
 
     it('login flow', async () => {
