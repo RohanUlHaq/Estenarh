@@ -27,8 +27,10 @@ export async function completeLoginFlow({ email, password }: LoginParams) {
     await login_screenLocators.unhide_eyebtn.click();
     await login_screenLocators.password_nextbtn.click();
 
+    await browser.pause(timeouts.SHORT_WAIT);
+    await expect(login_screenLocators.home_screen_identifier).toBeDisplayed();
+    await expect(login_screenLocators.home_screen_identifier).toHaveText('Consultants');
     // Handle notifications
-    await browser.pause(timeouts.CLICK_WAIT);
     // await login_screenLocators.Notnow_notifications.click();
 }
 
@@ -110,6 +112,8 @@ export async function SignupFlow({ otp, password, confirmpassword }: SignupParam
     await expect(signup_screenLocators.welcome_message).toBeDisplayed();
     await expect(signup_screenLocators.welcome_message).toHaveText('Glad to have you at Estenarh!');
     await signup_screenLocators.welcome_nextbtn.click();
+    await expect(login_screenLocators.home_screen_identifier).toBeDisplayed();
+    await expect(login_screenLocators.home_screen_identifier).toHaveText('Consultants');
     // await login_screenLocators.Notnow_notifications.click();
 }
 
@@ -244,7 +248,10 @@ export async function Packagebuy({ consultant, cvc }: PackagebuyParams) {
     await book_sessionLocators.Paybutton_hyperpay.click();
     await browser.pause(timeouts.PAYMENT_CONFIRMATION);
     await book_sessionLocators.payment_completebtn.click();
-
+    await browser.pause(timeouts.SHORT_WAIT);
+    await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollForward()');
+    await expect(book_sessionLocators.package_identifier).toBeDisplayed();
+    await expect(book_sessionLocators.package_identifier).toHaveText('Package Duration');
 }
 
 type GiftWalletParams = { email: string, name: string, message: string, cvc: string, cardNumber: string, expiryDate: string, cardholderName: string }
