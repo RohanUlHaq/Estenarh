@@ -133,9 +133,8 @@ class BookSessionLocators {
     get tabbytermscheckbox() {
         return $('//android.view.View[@resource-id="tabby-checkout"]/android.view.View/android.view.View[4]/android.view.View/android.view.View/android.view.View[4]/android.widget.Image');
     }
-    // get paytabbybtn() {
-    //     return $('//android.widget.Button[@text="Pay 47.42 SAR"]');
-    // }
+    get package_identifier() {
+        return $('//android.widget.TextView[@text="Package Duration"]');
+    }
 }
-
 module.exports = new BookSessionLocators();

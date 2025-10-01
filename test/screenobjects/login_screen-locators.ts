@@ -34,6 +34,9 @@ class LoginScreenLocators {
     get Notnow_notifications() {
         return $('~Not Now');
     }
+    get home_screen_identifier() {
+        return $('(//android.widget.TextView[@text="Consultants"])[1]');
+    }
 }
 
 module.exports = new LoginScreenLocators();
