@@ -1,6 +1,6 @@
 export const miscellaneous = {
     ConsultantName: 'Rohan Ul Haq',
-    ConsultnatName2: 'Nawaz Sharif',
+    ConsultantName2: 'Nawaz Sharif',
     ConsultantName3: 'Ahmed Ali',
     ConsultantName4: 'Nayela Shafi',
     ClientMail: 'rohanulhaq004@gmail.com',

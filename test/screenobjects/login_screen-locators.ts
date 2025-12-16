@@ -37,6 +37,12 @@ class LoginScreenLocators {
     get home_screen_identifier() {
         return $('(//android.widget.TextView[@text="Consultants"])[1]');
     }
+    get logout_menubtn() {
+        return $('//android.view.ViewGroup[@content-desc="menu_btn_log_out"]');
+    }
+    get guestuser_text() {
+        return $('//android.widget.TextView[@text="Guest User"]');
+    }
 }
 
 module.exports = new LoginScreenLocators();
