@@ -1,4 +1,5 @@
 import { $ } from "@wdio/globals";
+console.log('Loaded forgot_password-locators');
 class ForgotPasswordLocators {
     get bottom_nav_menu() {
         return $('~Menu');
