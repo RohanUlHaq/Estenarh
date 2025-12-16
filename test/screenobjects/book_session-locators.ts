@@ -26,7 +26,7 @@ class BookSessionLocators {
         return $('~schedule_session_btn_book_session');
     }
     get all_timeslots() {
-        return $$('//android.view.ViewGroup[contains(@content-desc, "am") or contains(@content-desc, "pm")]/android.view.ViewGroup');
+        return $$('//android.view.ViewGroup[matches(@resource-id, "[0-9]{1,2}:[0-9]{2}(am|pm)")]');
     }
     get sessionconfirmation_paynow() {
         return $('~session_confirmation_btn_pay_now');
@@ -135,6 +135,9 @@ class BookSessionLocators {
     }
     get package_identifier() {
         return $('//android.widget.TextView[@text="Package Duration"]');
+    }
+    booking_card_identifier(consultant: string) {
+        return $(`//android.widget.TextView[@text='${consultant}']`);
     }
 }
 module.exports = new BookSessionLocators();

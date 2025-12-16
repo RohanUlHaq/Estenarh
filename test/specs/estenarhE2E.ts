@@ -8,12 +8,12 @@ const signup_screenLocators = require('../screenobjects/signup_screen-locators')
 const forgot_passwordLocators = require('../screenobjects/forgot_password-locators');
 const book_sessionLocators = require('../screenobjects/book_session-locators');
 const gift_walletLocators = require('../screenobjects/gift_wallet-locators');
-const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCardsbookingflow, Packagebuy, GiftWalletFlow } = require('../helpers/testFlows');
+const { completeLoginFlow, ForgotPassword, SignupFlow, BookSessionTabby, SavedCardsbookingflow, Packagebuy, GiftWalletFlow, E2EFlow } = require('../helpers/testFlows');
 
 describe('Estenarh App Test Suite', () => {
-    beforeEach(async function () {
-        allure.addFeature('Estenarh Mobile App');
-    });
+    // beforeEach(async function () {
+    //     allure.addFeature('Estenarh Mobile App');
+    // });
 
     // it('login flow', async () => {
     //     allure.addFeature('Authentication');
@@ -41,17 +41,17 @@ describe('Estenarh App Test Suite', () => {
     //     allure.endStep();
     // });
 
-    it('Package buying', async () => {
-        allure.addFeature('Package Purchase');
-        allure.addSeverity('critical');
-        allure.addDescription('Verify user can purchase a consultation package', 'text');
-        allure.startStep('Select and purchase package');
-        await Packagebuy({
-            consultant: miscellaneous.ConsultantName,
-            cvc: cardInputs.CVC
-        });
-        allure.endStep();
-    });
+    // it('Package buying', async () => {
+    //     allure.addFeature('Package Purchase');
+    //     allure.addSeverity('critical');
+    //     allure.addDescription('Verify user can purchase a consultation package', 'text');
+    //     allure.startStep('Select and purchase package');
+    //     await Packagebuy({
+    //         consultant: miscellaneous.ConsultantName,
+    //         cvc: cardInputs.CVC
+    //     });
+    //     allure.endStep();
+    // });
 
     //     it('Forgot Password', async () => {
     //         allure.addFeature('Authentication');
@@ -68,20 +68,20 @@ describe('Estenarh App Test Suite', () => {
     //         allure.endStep();
     //     });
 
-    //     it('Book Session with Tabby', async () => {
-    //         allure.addFeature('Payment Processing');
-    //         allure.addSeverity('critical');
-    //         allure.addDescription('Verify booking session using Tabby payment method', 'text');
+    // it('Book Session with Tabby', async () => {
+    //     allure.addFeature('Payment Processing');
+    //     allure.addSeverity('critical');
+    //     allure.addDescription('Verify booking session using Tabby payment method', 'text');
 
-    //         allure.startStep('Book session with consultant');
-    //         await BookSessionTabby({
-    //             consultant: miscellaneous.ConsultantName,
-    //             email: cardInputs.TabbyEmail,
-    //             phone: cardInputs.TabbyPhone,
-    //             otp: cardInputs.TabbyOTP
-    //         });
-    //         allure.endStep();
+    //     allure.startStep('Book session with consultant');
+    //     await BookSessionTabby({
+    //         consultant: miscellaneous.ConsultantName2,
+    //         email: cardInputs.TabbyEmail,
+    //         phone: cardInputs.TabbyPhone,
+    //         otp: cardInputs.TabbyOTP
     //     });
+    //     allure.endStep();
+    // });
 
     //     it('Gift Wallet Flow', async () => {
     //         allure.addFeature('Gift Wallet');
@@ -100,4 +100,18 @@ describe('Estenarh App Test Suite', () => {
     //         });
     //         allure.endStep();
     //     })
+
+    it('E2E Flow', async () => {
+        allure.addFeature('End-to-End Flow');
+        allure.addSeverity('critical');
+        allure.addDescription('Verify complete user journey from login to booking a session', 'text');
+        allure.startStep('Execute end-to-end user flow');
+        await E2EFlow({
+            email: miscellaneous.ClientMail,
+            password: miscellaneous.ClientPassword,
+            consultant: miscellaneous.ConsultantName,
+            cvc: cardInputs.CVC
+        });
+        allure.endStep();
+    });
 });
